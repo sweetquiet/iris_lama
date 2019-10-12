@@ -1,5 +1,5 @@
 
-find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(Eigen3 REQUIRED)
 
 set(lama_SOURCES
     pose2d.cpp
@@ -52,10 +52,17 @@ set(lama_SOURCES
     pf_slam2d.cpp
 )
 
+include_directories(
+    include
+    ${catkin_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIRS}
+)
+
+
 add_library(iris-lama STATIC ${lama_SOURCES})
 
 target_include_directories(iris-lama PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_compile_options(iris-lama PRIVATE -Wall)
-target_link_libraries (iris-lama Eigen3::Eigen)
+# target_link_libraries (iris-lama Eigen3::Eigen)
 

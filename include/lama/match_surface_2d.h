@@ -40,19 +40,23 @@
 
 #include <vector>
 
-namespace lama {
+namespace lama
+{
 
-struct MatchSurface2D : public Problem {
+struct MatchSurface2D : public Problem
+{
 
-    MatchSurface2D(const DynamicDistanceMap*  surface,
-                   const PointCloudXYZ::Ptr& scan,
-                   const SE2d& estimate);
+    MatchSurface2D(const DynamicDistanceMap *surface,
+                   const PointCloudXYZ::Ptr &scan,
+                   const SE2d &estimate);
 
     /**
      *
      */
     inline SE2d getState() const
-    { return state_; }
+    {
+        return state_;
+    }
 
     /**
      *  Compute residuals and Jacobian.
@@ -61,20 +65,19 @@ struct MatchSurface2D : public Problem {
      *  @param[out] residuals Computed residuals.
      *  @param[out] J         Jacobian matrix.
      */
-    void eval(VectorXd& residuals, MatrixXd* J);
+    void eval(VectorXd &residuals, MatrixXd *J);
 
     /**
      * Update the internal state.
      *
      * @param[in] h Optimization step.
      */
-    void update(const VectorXd& h);
+    void update(const VectorXd &h);
 
-    const DynamicDistanceMap* surface_;
-    PointCloudXYZ::Ptr      scan_;
+    const DynamicDistanceMap *surface_;
+    PointCloudXYZ::Ptr scan_;
 
     SE2d state_;
 };
 
-} /* lama */
-
+} // namespace lama

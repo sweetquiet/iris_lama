@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
-project(iris_lama VERSION 1.0 LANGUAGES CXX C)
+cmake_minimum_required(VERSION 3.5)
+project(iris_lama)
 
 set(CMAKE_CXX_STANDARD 11) # use c++11
 
@@ -7,6 +7,12 @@ set(CMAKE_CXX_STANDARD 11) # use c++11
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
+
+find_package(catkin REQUIRED COMPONENTS
+    roscpp
+)
+
+catkin_package()
 
 add_subdirectory(src)
 

@@ -43,22 +43,23 @@
 #include "sdm/dynamic_distance_map.h"
 #include "sdm/simple_occupancy_map.h"
 
-namespace lama {
+namespace lama
+{
 
-class Loc2D {
+class Loc2D
+{
 public:
-
     typedef Solver::Options SolverOptions;
 
-    typedef Strategy::Ptr   StrategyPtr;
+    typedef Strategy::Ptr StrategyPtr;
     typedef RobustCost::Ptr RobustCostPtr;
 
-    typedef std::shared_ptr<DynamicDistanceMap>    DynamicDistanceMapPtr;
-    typedef std::shared_ptr<SimpleOccupancyMap>    SimpleOccupancyMapPtr;
+    typedef std::shared_ptr<DynamicDistanceMap> DynamicDistanceMapPtr;
+    typedef std::shared_ptr<SimpleOccupancyMap> SimpleOccupancyMapPtr;
 
 public:
-
-    struct Options {
+    struct Options
+    {
         Options();
         /// the ammount of displacement that the system must
         /// gather before any update takes place.
@@ -89,33 +90,36 @@ public:
     };
 
 public:
-
-    SimpleOccupancyMap* occupancy_map;
-    DynamicDistanceMap* distance_map;
+    SimpleOccupancyMap *occupancy_map;
+    DynamicDistanceMap *distance_map;
 
     Loc2D() = default;
-    void Init(const Options& options = Options());
+    void Init(const Options &options = Options());
 
     virtual ~Loc2D();
 
-    bool enoughMotion(const Pose2D& odometry);
+    bool enoughMotion(const Pose2D &odometry);
 
-    bool update(const PointCloudXYZ::Ptr& surface, const Pose2D& odometry, double timestamp);
+    bool update(const PointCloudXYZ::Ptr &surface, const Pose2D &odometry, double timestamp);
 
     void triggerGlobalLocalization();
 
-    inline void setPose(const Pose2D& pose)
-    { pose_ = pose; has_first_scan = false; }
+    inline void setPose(const Pose2D &pose)
+    {
+        pose_ = pose;
+        has_first_scan = false;
+    }
 
-    inline const Pose2D& getPose() const
-    { return pose_; }
+    inline const Pose2D &getPose() const
+    {
+        return pose_;
+    }
 
 private:
+    void globalLocalization(const PointCloudXYZ::Ptr &surface);
 
-    void globalLocalization(const PointCloudXYZ::Ptr& surface);
-
-    StrategyPtr makeStrategy(const std::string& name, const VectorXd& parameters);
-    RobustCostPtr makeRobust(const std::string& name, const double& param);
+    StrategyPtr makeStrategy(const std::string &name, const VectorXd &parameters);
+    RobustCostPtr makeRobust(const std::string &name, const double &param);
 
 private:
     SolverOptions solver_options_;
@@ -129,5 +133,4 @@ private:
     bool do_global_loclization_;
 };
 
-} /* lama */
-
+} // namespace lama

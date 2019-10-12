@@ -41,15 +41,17 @@
 #include "lama/nlls/strategy.h"
 #include "lama/nlls/robust_cost.h"
 
-namespace lama {
+namespace lama
+{
 
 /**
  * Class for solving nonlinear least-squares (NLLS) problems.
  */
-class Solver {
+class Solver
+{
 public:
-
-    struct Options {
+    struct Options
+    {
         Options();
 
         /// Maximum number of iterations that can be executed.
@@ -67,21 +69,19 @@ public:
     };
 
 public:
+    Solver(const Options &options = Options());
 
-    Solver(const Options& options = Options());
+    void solve(Problem &problem, MatrixXd *cov = 0);
 
-    void solve(Problem& problem, MatrixXd* cov = 0);
 private:
-
-    void computeWeights(const VectorXd& residuals, VectorXd& weights);
-    void scaleJacobian(const VectorXd& weights, MatrixXd& J);
-    void calculateCovariance(const MatrixXd& J, MatrixXd* cov) const;
+    void computeWeights(const VectorXd &residuals, VectorXd &weights);
+    void scaleJacobian(const VectorXd &weights, MatrixXd &J);
+    void calculateCovariance(const MatrixXd &J, MatrixXd *cov) const;
 
 private:
     Options options_;
 };
 
-void Solve(const Solver::Options& options, Problem& problem, MatrixXd* cov = 0);
+void Solve(const Solver::Options &options, Problem &problem, MatrixXd *cov = 0);
 
-} /* lama */
-
+} // namespace lama

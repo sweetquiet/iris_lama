@@ -12,13 +12,14 @@ The main feature is *efficiency*. Low computational effort and low memory usage 
 
 #### Build
 
-To build LaMa, clone it from GitHub and use CMake to build.
+To build LaMa, clone it from GitHub and use catkin_make to build.
 ```
-$ git clone https://github.com/iris-ua/iris_lama
-$ cd iris_lama
-$ mkdir build
-$ cd build
-$ cmake ..
+$ mkdir src
+$ cd src
+$ git clone git clone -b kinetic https://github.com/sweetquiet/iris_lama.git
+$ cd ..
+$ catkin_make
+
 ```
 Its only dependency is [Eigen3](http://eigen.tuxfamily.org).
 **Note**: LaMa does not provide any executable. For an example on how to use it, please take a look at our integration with ROS.
